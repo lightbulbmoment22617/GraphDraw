@@ -835,6 +835,18 @@ public class DrawController extends AnimationControl {
 		return (int) (386 + 210 * Math.cos((index - index % pairSize + index % pairSize * clusterDistance)* (2 * Math.PI / usedList.size())));
 	}
 
+	public static int getAutCircleY(int numOfPairs, int indexOfNode) {
+		double angle = (Math.PI / (numOfPairs+1));
+		double myAngle = angle * (indexOfNode+1);
+		return (int) (224-(200*Math.cos(myAngle)));
+	}
+
+	public static int getAutCircleX(int numOfPairs, int indexOfNode) {
+		double angle = (Math.PI / (numOfPairs+1));
+		double myAngle = angle * (indexOfNode+1);
+		return (int) ((200*Math.sin(myAngle)) + 387);
+	}
+
 	private static void drawRandomlyOnCircle(int numNodes) {
 		// draw the nodes
 		ArrayList<Integer> randomArray = new ArrayList<Integer>();
