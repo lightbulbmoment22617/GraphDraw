@@ -260,7 +260,7 @@ public class Window {
 		} catch (FontFormatException e) {
 			e.printStackTrace();
 		}
-		
+
 		String filename = "Temp\\logo.png";
 		BufferedImage img;
 		try {
@@ -268,7 +268,7 @@ public class Window {
 			frmGraphDraw.setIconImage(img);
 		} catch (IOException e2) {
 		}
-		
+
 
 		frmGraphDraw.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
 		frmGraphDraw.setTitle("Graph Draw");
@@ -323,12 +323,12 @@ public class Window {
 		} catch (IOException ex) {
 			System.out.print("Temp folder does not contain matrix.png!");
 		}
-		
+
 		JLabel imageLabel = new JLabel(new ImageIcon(image));
 		imageLabel.setBounds(80, 50, 340, 340);
 		imageLabel.setVisible(true);
 		panel_help.add(imageLabel);
-		
+
 		JTextArea helpText = new JTextArea();
 		String space = "                                                                                                          ";
 		helpText.setText("To demonstrate the usage of this software, please click the import demo button. This will import a 21 nodes graph\r\nwith the following adjacency matrix and the following automorphism group generators:\r\n\r\n\r\n"+space+"Automorphism group generator:\r\n"+space+"[1,8,7], [3,17,13], [4,11,19], [5,20,10], [6,14,16]\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nClick back to go to \u201CDraw Mode\u201D after importing the graph. Now you can select between the 6 draw modes and\r\nunder each draw mode there are several optimisations. To find out what each mode and optimisation does,\r\nplease read sections 3.3 and 3.4 of the documentation that can be accessed by clicking \u201CMore details\u201D.");
@@ -4111,9 +4111,9 @@ public class Window {
 		aut5_10.setBounds(751, 259, 25, 25);
 		panel_edit_mode.add(aut5_10);
 
-		
 
-		
+
+
 		aut6_1 = new TextField();
 		aut6_1.setColumns(10);
 		aut6_1.setBounds(526, 284, 25, 25);
@@ -4164,7 +4164,7 @@ public class Window {
 		aut6_10.setBounds(751, 284, 25, 25);
 		panel_edit_mode.add(aut6_10);
 
-		
+
 
 		aut7_1 = new TextField();
 		aut7_1.setColumns(10);
@@ -4759,12 +4759,12 @@ public class Window {
 		panel_1_alternative.setBounds(111, 5, 365, 95);
 		frmGraphDraw.getContentPane().add(panel_1_alternative);
 		panel_1_alternative.setLayout(null);
-		
+
 				JLabel lblDrawingSettings = new JLabel("Settings");
 				lblDrawingSettings.setFont(feltTipRoman);
 				lblDrawingSettings.setBounds(5, 5, 60, 15);
 				panel_1_alternative.add(lblDrawingSettings);
-				
+
 						JButton btnBack = new JButton("Back");
 						btnBack.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) {
@@ -4777,17 +4777,17 @@ public class Window {
 						btnBack.setFont(feltTipRoman);
 						btnBack.setBounds(274, 65, 86, 25);
 						panel_1_alternative.add(btnBack);
-						
+
 								JLabel lblOptionSelected = new JLabel("Option selected:");
 								lblOptionSelected.setFont(feltTipRoman.deriveFont((float) 13.0));
 								lblOptionSelected.setBounds(71, 5, 92, 14);
 								panel_1_alternative.add(lblOptionSelected);
-								
+
 										final JLabel Selected = new JLabel("You should not see this. Bug!!!");
 										Selected.setFont(feltTipRoman.deriveFont((float) 13.0));
 										Selected.setBounds(158, 5, 185, 14);
 										panel_1_alternative.add(Selected);
-										
+
 												final JButton btnFlip = new JButton("Flip");
 												btnFlip.addActionListener(new ActionListener() {
 													public void actionPerformed(ActionEvent arg0) {
@@ -4797,7 +4797,7 @@ public class Window {
 												btnFlip.setFont(feltTipRoman);
 												btnFlip.setBounds(15, 31, 86, 25);
 												panel_1_alternative.add(btnFlip);
-												
+
 														final JButton btnReduceCrossings = new JButton("Reduce crossings");
 														btnReduceCrossings.addActionListener(new ActionListener() {
 															public void actionPerformed(ActionEvent arg0) {
@@ -4807,7 +4807,7 @@ public class Window {
 														btnReduceCrossings.setFont(feltTipRoman);
 														btnReduceCrossings.setBounds(15, 31, 131, 25);
 														panel_1_alternative.add(btnReduceCrossings);
-														
+
 																final JButton btnReduceSumOf = new JButton("Reduce edge lenghts sum");
 																btnReduceSumOf.addActionListener(new ActionListener() {
 																	public void actionPerformed(ActionEvent arg0) {
@@ -4817,52 +4817,52 @@ public class Window {
 																btnReduceSumOf.setFont(feltTipRoman);
 																btnReduceSumOf.setBounds(158, 30, 202, 25);
 																panel_1_alternative.add(btnReduceSumOf);
-																
+
 																		final JRadioButton clusterDistance2 = new JRadioButton("");
 																		clusterDistance2.setBounds(178, 65, 21, 21);
 																		panel_1_alternative.add(clusterDistance2);
-																		
+
 																				final JRadioButton clusterDistance3 = new JRadioButton("");
 																				clusterDistance3.setBounds(199, 65, 21, 21);
 																				panel_1_alternative.add(clusterDistance3);
-																				
+
 																						final JRadioButton clusterDistance4 = new JRadioButton("");
 																						clusterDistance4.setBounds(220, 65, 21, 21);
 																						panel_1_alternative.add(clusterDistance4);
-																						
+
 																								final JRadioButton clusterDistance1 = new JRadioButton("");
 																								clusterDistance1.setBounds(157, 65, 21, 21);
 																								clusterDistance1.setSelected(true);
 																								panel_1_alternative.add(clusterDistance1);
-																								
+
 																										final JLabel lblClusterDistance = new JLabel("Cluster distance:");
 																										lblClusterDistance.setFont(feltTipRoman);
 																										lblClusterDistance.setBounds(25, 66, 150, 14);
 																										panel_1_alternative.add(lblClusterDistance);
-																										
+
 																												final JLabel lblDiameter = new JLabel("Diameter:");
 																												lblDiameter.setBounds(22, 66, 78, 17);
 																												panel_1_alternative.add(lblDiameter);
 																												lblDiameter.setHorizontalAlignment(SwingConstants.CENTER);
 																												lblDiameter.setFont(feltTipRoman);
-																												
+
 																														final JRadioButton radio60 = new JRadioButton("");
 																														radio60.setBounds(157, 65, 21, 21);
 																														panel_1_alternative.add(radio60);
-																														
+
 																																final JRadioButton radio50 = new JRadioButton("");
 																																radio50.setBounds(136, 65, 21, 21);
 																																panel_1_alternative.add(radio50);
 																																radio50.setSelected(true);
-																																
+
 																																		final JRadioButton radio70 = new JRadioButton("");
 																																		radio70.setBounds(178, 65, 21, 21);
 																																		panel_1_alternative.add(radio70);
-																																		
+
 																																				final JRadioButton radio80 = new JRadioButton("");
 																																				radio80.setBounds(199, 65, 21, 21);
 																																				panel_1_alternative.add(radio80);
-																																				
+
 																																						final JRadioButton radio120 = new JRadioButton("");
 																																						radio120.setBounds(220, 65, 21, 21);
 																																						panel_1_alternative.add(radio120);
@@ -4880,9 +4880,9 @@ public class Window {
 
 																																							}
 																																						});
-																																						
+
 																																								radio80.addActionListener(new ActionListener() {
-																																						
+
 																																									@Override
 																																									public void actionPerformed(ActionEvent e) {
 																																										radio120.setSelected(false);
@@ -4892,12 +4892,12 @@ public class Window {
 																																										radio60.setSelected(false);
 																																										ac.setVSize(80);
 																																										ac.redraw();
-																																						
+
 																																									}
 																																								});
-																																								
+
 																																										radio70.addActionListener(new ActionListener() {
-																																								
+
 																																											@Override
 																																											public void actionPerformed(ActionEvent e) {
 																																												radio120.setSelected(false);
@@ -4907,12 +4907,12 @@ public class Window {
 																																												radio60.setSelected(false);
 																																												ac.setVSize(70);
 																																												ac.redraw();
-																																								
+
 																																											}
 																																										});
-																																										
+
 																																												radio50.addActionListener(new ActionListener() {
-																																										
+
 																																													@Override
 																																													public void actionPerformed(ActionEvent e) {
 																																														radio50.setSelected(true);
@@ -4922,12 +4922,12 @@ public class Window {
 																																														radio120.setSelected(false);
 																																														ac.setVSize(50);
 																																														ac.redraw();
-																																										
+
 																																													}
 																																												});
-																																												
+
 																																														radio60.addActionListener(new ActionListener() {
-																																												
+
 																																															@Override
 																																															public void actionPerformed(ActionEvent e) {
 																																																radio120.setSelected(false);
@@ -4937,12 +4937,12 @@ public class Window {
 																																																radio60.setSelected(true);
 																																																ac.setVSize(60);
 																																																ac.redraw();
-																																												
+
 																																															}
 																																														});
-																																														
+
 																																																clusterDistance1.addActionListener(new ActionListener() {
-																																														
+
 																																																	@Override
 																																																	public void actionPerformed(ActionEvent e) {
 																																																		clusterDistance1.setSelected(true);
@@ -4953,9 +4953,9 @@ public class Window {
 																																																		ac.redraw();
 																																																	}
 																																																});
-																																																
+
 																																																		clusterDistance2.addActionListener(new ActionListener() {
-																																																
+
 																																																			@Override
 																																																			public void actionPerformed(ActionEvent e) {
 																																																				clusterDistance1.setSelected(false);
@@ -4966,9 +4966,9 @@ public class Window {
 																																																				ac.redraw();
 																																																			}
 																																																		});
-																																																		
+
 																																																				clusterDistance3.addActionListener(new ActionListener() {
-																																																		
+
 																																																					@Override
 																																																					public void actionPerformed(ActionEvent e) {
 																																																						clusterDistance1.setSelected(false);
@@ -4979,9 +4979,9 @@ public class Window {
 																																																						ac.redraw();
 																																																					}
 																																																				});
-																																																				
+
 																																																						clusterDistance4.addActionListener(new ActionListener() {
-																																																				
+
 																																																							@Override
 																																																							public void actionPerformed(ActionEvent e) {
 																																																								clusterDistance1.setSelected(false);
@@ -5012,7 +5012,7 @@ public class Window {
 
 				try {
 					java.awt.Desktop.getDesktop().browse(
-							new URI("https://github.com/dmiron23/GraphDraw"));
+							new URI("https://github.com/lightbulbmoment22617/GraphDraw"));
 				} catch (IOException | URISyntaxException e) {
 					e.printStackTrace();
 				}
@@ -5179,7 +5179,7 @@ public class Window {
 						radio80.setVisible(false);
 						radio80.setEnabled(false);
 						radio120.setVisible(false);
-						radio120.setEnabled(false);	
+						radio120.setEnabled(false);
 					}
 					if (a.equals(rdbtnSymmetricalCircle1)) {
 						ac.setAutOption(2);
@@ -5430,9 +5430,9 @@ public class Window {
 
 		return printables;
 	}
-	
+
 	public static Font getFeltTip(){
 		return feltTipRoman;
 	}
-	
+
 }
