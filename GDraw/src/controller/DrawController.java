@@ -660,34 +660,62 @@ public class DrawController extends AnimationControl {
 	}
 
 	private static void drawOnCircleByAutomorphism(int nonAutOption, boolean a) {
-		// draw the nodes
+
 		usedList = (a) ? autList1 : autList2;
+
+		// Create an array of the nodes in the automorphism
+		Integer[] autArray = new Integer[numPairs * 2];
+		int counter = 0;
+		for (Integer i : autList2) {
+			if (counter < autArray.length) {
+				autArray[counter] = i;
+			}
+			counter++;
+		}
+
+		//No clue why this is here
 		if (!a){
 			int aux = numPairs;
 			numPairs = pairSize;
 			pairSize = aux;
 		}
+
+		// Draw the nodes in the automorphism and create a list of the remaining (fixed) nodes
 		nonAutList = new ArrayList<Integer>();
 		for (int i = 0; i < numNodes; i++) {
 			if (usedList.contains(i + 1)) {
-				addNode(getAutCricleX(i + 1, usedList),
-						getAutCricleY(i + 1, usedList), i);
+				//Loops through every node in the right orbital. As each one is drawn the corresponding node in the left orbital is also drawn
+				for (int j = 0; j < autArray.length / 2; j++) {
+					if (i+1 == autArray[j]) {
+						addNode(getAutCircleX(autArray.length/2, j), getAutCircleY(autArray.length/2, j), i);
+						addNode(774-getAutCircleX(autArray.length/2, j), getAutCircleY(autArray.length/2, j), autArray[j+(autArray.length/2)]-1);
+					}
+				}
 			} else
 				// this means that the node is not in the automorphism group
 				nonAutList.add(i);
 		}
-		if (nonAutOption == 0)// draw nodes on circle in the middle
+
+		//Draw the fixed nodes on a line down the middle. If the node "1" is fixed then draw it at the top of the outer circle
+		if (nonAutOption == 0)
 			for (int j = 0; j < numNodes; j++)
 				if (nonAutList.contains(j)) {
-					addNode(387,
-							getNonAutCricleY(j, nonAutList), j);
+					if (j == 0) {
+						addNode(387, 24, j);
+					} else {
+						addNode(387,
+								getNonAutCricleY(j, nonAutList), j);
+					}
 				}
-		// draw the edges
+
+		//Again, no clue why this is here
 		if (!a){
 			int aux = numPairs;
 			numPairs = pairSize;
 			pairSize = aux;
 		}
+
+		//Draw the edges
 		drawEdges();
 	}
 
