@@ -495,7 +495,7 @@ public class DrawController extends AnimationControl {
 			whereImAt = "adding to automorphism";
 			i = 0;
 		} else if (entry.contains("Graphical representation:")) {
-			
+
 			graphRepAvailable = true;
 		} else if (entry.contains("Nodes: ")) {
 			whereImAt = "adding nodes on plane";
@@ -607,9 +607,9 @@ public class DrawController extends AnimationControl {
 		}
 		autList2 = new ArrayList<Integer>();
 		autList2.addAll(tempList);
-		
-		
-		
+
+
+
 
 	}
 
@@ -679,7 +679,7 @@ public class DrawController extends AnimationControl {
 		if (nonAutOption == 0)// draw nodes on circle in the middle
 			for (int j = 0; j < numNodes; j++)
 				if (nonAutList.contains(j)) {
-					addNode(getNonAutCricleX(j, nonAutList),
+					addNode(387,
 							getNonAutCricleY(j, nonAutList), j);
 				}
 		// draw the edges
@@ -1153,7 +1153,7 @@ public class DrawController extends AnimationControl {
 
 			g.drawLine(ll.getX(), ll.getY(), ll.getX2(), ll.getY2());
 		}
-		
+
 		for (GraphicsObject go : nodeLayer.children) {
 			g.setColor(Color.WHITE);
 			g.fillOval(go.x, go.y, 12, 12);
@@ -1189,12 +1189,12 @@ public class DrawController extends AnimationControl {
 	@Override
 	public void setVSize(int i) {
 		vSize = i;
-		
+
 	}
 
 	@Override
 	public void setClusterDistance(double d) {
 		clusterDistance = d;
-		
+
 	}
 }
