@@ -10,7 +10,9 @@ import graphics.Rectangle;
 import graphics.TweenClass.Tween;
 import graphics.TweenClass.TweenEvent;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -36,6 +38,12 @@ import canvas.AnimationControl;
 import canvas.DelayThread;
 import canvas.FileCreator;
 import canvas.DrawCanvas;
+
+// SVG library
+import org.apache.batik.dom.GenericDOMImplementation;
+import org.apache.batik.svggen.SVGGraphics2D;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
 
 public class DrawController extends AnimationControl {
 	private File lastFile;
@@ -69,6 +77,7 @@ public class DrawController extends AnimationControl {
 	private static ArrayList<ArrayList<Integer>> niceListB = new ArrayList<ArrayList<Integer>>();
 	private static ArrayList<Integer> nonAutList = new ArrayList<Integer>();
 	private static int vSize = 50;
+	private static final int NODE_RADIUS = 10;
 
 	public DrawController(DrawCanvas _c, JTextArea _pseudo) {
 		super(_c, _pseudo);
@@ -1165,20 +1174,30 @@ public class DrawController extends AnimationControl {
 	public File getLastFile() {
 		return lastFile;
 	}
-
 	@Override
+	// Button to allow images to be saved in an SVG document
 	public void saveImage() {
-		BufferedImage image = new BufferedImage(800, 500,
-				BufferedImage.TYPE_INT_RGB);
-		Graphics g = image.getGraphics();
-		int r = 255;
-		int g1 = 255;
-		int b = 255;
-		int col = (r << 16) | (g1 << 8) | b;
-		//background
-		for (int i = 0; i < 800; i++)
-			for (int j = 0; j < 500; j++)
-				image.setRGB(i, j, col);
+
+		// Creates canvas for the image
+		final int WIDTH = 800;
+		final int HEIGHT = 500;
+		final Dimension canvasSize = new Dimension(WIDTH, HEIGHT);
+
+		final String svgNS = "http://www.w3.org/2000/svg";
+
+        // Sets up the SVG document to be used
+        DOMImplementation domImpl =
+            GenericDOMImplementation.getDOMImplementation();
+        Document document = domImpl.createDocument(svgNS, "svg", null);
+
+		// Creates an instance of the SVG Generator, which will
+        // write to the SVG document
+        SVGGraphics2D g = new SVGGraphics2D(document);
+        g.setSVGCanvasSize(canvasSize);
+
+		// Creates the background for the image
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
 
 		g.setColor(Color.BLACK);
 		((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -1188,29 +1207,32 @@ public class DrawController extends AnimationControl {
 		((Graphics2D) g).setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS,
 				RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
+		// Creates the edges of the graph
+		((Graphics2D) g).setStroke(new BasicStroke(0.6f));
 		for (GraphicsObject go : lineLayer.children) {
 			LabeledLine ll = (LabeledLine) go;
-
 			g.drawLine(ll.getX(), ll.getY(), ll.getX2(), ll.getY2());
 		}
 
+		// Creates the ovals to represent the nodes
+		((Graphics2D) g).setStroke(new BasicStroke(1.25f));
+		int nodeDiameter = NODE_RADIUS*2;
 		for (GraphicsObject go : nodeLayer.children) {
 			g.setColor(Color.WHITE);
-			g.fillOval(go.x, go.y, 12, 12);
+			g.fillOval(go.x, go.y, nodeDiameter, nodeDiameter);
 			g.setColor(Color.BLACK);
-			g.drawOval(go.x, go.y, 12, 12);
+			g.drawOval(go.x, go.y, nodeDiameter, nodeDiameter);
 		}
 
+		// Creates the labels for each node
 		g.setColor(Color.BLACK);
-		g.setFont(Window.getFeltTip().deriveFont((float)11.0).deriveFont(Font.BOLD));
-
+		g.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		for (GraphicsObject go : nodeLayer.children) {
-
 			CenteredLabel cl = ((Node) go).getLabel();
 			GlyphVector gv = g.getFont().createGlyphVector(
 					((Graphics2D) g).getFontRenderContext(), cl.text);
-			java.awt.Rectangle r1 = gv.getPixelBounds(null, cl.x, cl.y);
-			g.drawString(cl.text, cl.x - r1.width / 2, cl.y);
+			java.awt.geom.Rectangle2D r1 = gv.getVisualBounds();
+			g.drawString(cl.text, cl.x - (int)Math.round(r1.getWidth() / 2) - 1, cl.y+2);
 		}
 
 		try {
@@ -1218,9 +1240,11 @@ public class DrawController extends AnimationControl {
 			int returnVal = fc.showSaveDialog(null);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File f = fc.getSelectedFile();
-				if (!f.getAbsolutePath().endsWith(".jpg") && !f.getAbsolutePath().endsWith(".jpeg"))
-					f = new File(f.getAbsolutePath() + ".jpeg");
-				ImageIO.write(image, "jpg", f);
+				String filename = f.getAbsolutePath();
+				// Ensures that the file name ends with .svg
+				if (!filename.endsWith(".svg"))
+					filename += ".svg";
+				g.stream(filename);
 		}} catch (IOException e) {
 			e.printStackTrace();
 		}

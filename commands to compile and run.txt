@@ -1,3 +1,0 @@
-compile: javac sourcepath src -d bin src/Main/Window.java
-build: jar -cvfe GraphDraw.jar Main.Window *
-run: java -jar GraphDraw.jar

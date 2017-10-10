@@ -5031,8 +5031,8 @@ public class Window {
 		frmGraphDraw.getContentPane().add(panel_3);
 		panel_3.setLayout(null);
 
-		final JButton btnSaveImage = new JButton("Save JPG");
-		btnSaveImage.setToolTipText("Saves a JPEG of the Graph");
+		final JButton btnSaveImage = new JButton("Save SVG");
+		btnSaveImage.setToolTipText("Saves a SVG of the Graph");
 		btnSaveImage.setFont(feltTipRoman);
 		btnSaveImage.setBounds(5, 35, 86, 25);
 		panel_3.add(btnSaveImage);
